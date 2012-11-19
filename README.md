@@ -10,9 +10,9 @@ Requires junit 4.10 library.
 
 ```java
 
-import org.junit.runner.RunWith;<br/>
-import tomas.JUnitFactoryRunner;<br/>
-import tomas.JUnitFactoryRunner.JUnitFactory;<br/>
+import org.junit.runner.RunWith;
+import tomas.JUnitFactoryRunner;
+import tomas.JUnitFactoryRunner.JUnitFactory;
 
 @RunWith(JUnitFactoryRunner.class)
 public class SomeSuite {
@@ -22,7 +22,7 @@ public class SomeSuite {
         return new ATest("abc", 2);
     }
 
-    @;JUnitFactory
+    @JUnitFactory
     public static BTest test2() {
         return new BTest();
     }
