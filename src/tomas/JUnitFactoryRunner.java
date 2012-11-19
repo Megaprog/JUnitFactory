@@ -10,9 +10,9 @@ import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.TestClass;
 
 import java.lang.annotation.*;
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -25,7 +25,7 @@ import java.util.List;
 public class JUnitFactoryRunner extends ParentRunner<Runner> {
 
     /**
-     * Annotation for a factory method which provides {@link Iterable} of of tests instances.
+     * Annotation for a factory method which returns test instance.
      */
     @Target(ElementType.METHOD)
     @Retention(RetentionPolicy.RUNTIME)
@@ -37,10 +37,8 @@ public class JUnitFactoryRunner extends ParentRunner<Runner> {
      */
     public JUnitFactoryRunner(Class<?> klass) throws Throwable {
         super(klass);
-        Iterable tests = (Iterable) getFactoryMethod(getTestClass()).invokeExplosively(null);
-        Iterator iterator = tests.iterator();
-        while (iterator.hasNext()) {
-            getChildren().add(new TestClassRunner(iterator.next()));
+        for (FrameworkMethod each : getFactoryMethods(getTestClass())) {
+            getChildren().add(new TestClassRunner(each.getMethod()));
         }
     }
 
@@ -61,29 +59,39 @@ public class JUnitFactoryRunner extends ParentRunner<Runner> {
         child.run(notifier);
     }
 
-    protected FrameworkMethod getFactoryMethod(TestClass testClass) throws Exception {
+    protected Iterable<FrameworkMethod> getFactoryMethods(TestClass testClass) throws Exception {
         List<FrameworkMethod> methods = testClass.getAnnotatedMethods(JUnitFactory.class);
-        if (methods.isEmpty() || methods.size() > 1) {
-            throw new Exception("Must be one and only one method annotated with JUnitFactory annotation in class " + testClass.getName());
+        for (FrameworkMethod each : methods) {
+            //check method modifiers
+            Method method = each.getMethod();
+            int modifiers = method.getModifiers();
+            if (!Modifier.isStatic(modifiers) || !Modifier.isPublic(modifiers)) {
+                throw new Exception("No public static factory method " + each.getName() + " on class " + testClass.getName());
+            }
+            //check method return type
+            Class<?> returnType = method.getReturnType();
+            if (returnType.equals(void.class) || returnType.equals(Void.class)) {
+                throw new Exception("Method " + each.getName() + " annotated with JUnitFactory annotation must has something to return on class " + testClass.getName());
+            }
+            //check method parameters
+            if (method.getParameterTypes().length > 0) {
+                throw new Exception("Method " + each.getName() + " annotated with JUnitFactory annotation must has no parameters on class " + testClass.getName());
+            }
         }
-        int modifiers = methods.get(0).getMethod().getModifiers();
-        if (!Modifier.isStatic(modifiers) || !Modifier.isPublic(modifiers)) {
-            throw new Exception("No public static factory method on class " + testClass.getName());
-        }
-        return methods.get(0);
+        return methods;
     }
 
     private class TestClassRunner extends BlockJUnit4ClassRunner {
-        private final Object test;
+        private final Method createTestMethod;
 
-        TestClassRunner(Object test) throws InitializationError {
-            super(test.getClass());
-            this.test = test;
+        TestClassRunner(Method createTestMethod) throws InitializationError {
+            super(createTestMethod.getReturnType());
+            this.createTestMethod = createTestMethod;
         }
 
         @Override
         public Object createTest() throws Exception {
-            return test;
+            return createTestMethod.invoke(null);
         }
 
         @Override
@@ -93,7 +101,6 @@ public class JUnitFactoryRunner extends ParentRunner<Runner> {
         protected Annotation[] getRunnerAnnotations() {
             return new Annotation[0];
         }
-
     }
 
 }
