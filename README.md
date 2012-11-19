@@ -8,7 +8,7 @@ Requires junit 4.10 library.
 <p>
 <b>Example:</b>
 </p>
-
+<p>
 <code>
 
 import org.junit.runner.RunWith;<br/>
@@ -30,3 +30,4 @@ public class SomeSuite {
 }
 
 <code/>
+</p>
