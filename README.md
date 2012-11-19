@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
 import tomas.JUnitFactoryRunner;
 import tomas.JUnitFactoryRunner.JUnitFactory;
 
-@RunWith(JUnitFactoryRunner.class)
+&#064;RunWith(JUnitFactoryRunner.class)
 public class SomeSuite {
 
     @JUnitFactory
