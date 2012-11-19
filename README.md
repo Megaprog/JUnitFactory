@@ -8,7 +8,9 @@ Requires junit 4.10 library.
 <p>
 <b>Example:</b>
 </p>
+
 <code>
+
 import org.junit.runner.RunWith;<br/>
 import tomas.JUnitFactoryRunner;<br/>
 import tomas.JUnitFactoryRunner.JUnitFactory;<br/>
@@ -26,4 +28,5 @@ public class SomeSuite {
         return new BTest();
     }
 }
+
 <code/>
