@@ -5,11 +5,10 @@ JUnitFactory
 JUnitFactoryRunner and @JUnitFactory allow you to create JUnit tests dynamically. Like annotation @Factory in TestNG.<br/>
 Requires junit 4.10 library.
 </p>
-<p>
-<b>Example:</b>
-</p>
-<p>
-<code>
+
+##Example
+
+```java
 
 import org.junit.runner.RunWith;<br/>
 import tomas.JUnitFactoryRunner;<br/>
@@ -29,5 +28,4 @@ public class SomeSuite {
     }
 }
 
-<code/>
-</p>
+```
