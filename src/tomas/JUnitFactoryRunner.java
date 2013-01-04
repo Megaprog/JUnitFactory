@@ -20,6 +20,8 @@ import java.util.List;
  * The annotated method must returns {@link Iterable} of tests instances.
  * It is important to understand that tests will be created before execution @BeforeClass methods.
  *
+ * @see <a href="https://github.com/Megaprog/JUnitFactory">JUnitFactory project on GitHub</a>
+ *
  * @author Tomas Shestakov
  */
 public class JUnitFactoryRunner extends ParentRunner<Runner> {
@@ -35,8 +37,8 @@ public class JUnitFactoryRunner extends ParentRunner<Runner> {
     /**
      * Only called reflectively. Do not use programmatically.
      */
-    public JUnitFactoryRunner(Class<?> klass) throws Throwable {
-        super(klass);
+    public JUnitFactoryRunner(Class<?> clazz) throws Throwable {
+        super(clazz);
         for (FrameworkMethod each : getFactoryMethods(getTestClass())) {
             getChildren().add(new TestClassRunner(each.getMethod()));
         }
