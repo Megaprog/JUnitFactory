@@ -1,8 +1,8 @@
 package example;
 
 import org.junit.runner.RunWith;
-import tomas.JUnitFactoryRunner;
-import tomas.JUnitFactoryRunner.JUnitFactory;
+import testing.JUnitFactoryRunner;
+import testing.JUnitFactoryRunner.JUnitFactory;
 
 @RunWith(JUnitFactoryRunner.class)
 public class ASuite {

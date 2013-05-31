@@ -1,4 +1,4 @@
-package tomas;
+package testing;
 
 import org.junit.runner.Description;
 import org.junit.runner.Runner;
