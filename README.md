@@ -16,6 +16,7 @@ Or use it as a maven dependency:
     <groupId>org.jmmo</groupId>
     <artifactId>junit-factory</artifactId>
     <version>1.0</version>
+    <scope>test</scope>
 </dependency>
 ```
 
