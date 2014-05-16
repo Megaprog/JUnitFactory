@@ -9,7 +9,7 @@
 
     <name>JUnitFactory</name>
     <description>It is allow to create JUnit tests dynamically how the annotation @Factory in TestNG does</description>
-    <url>https://github.com/Megaprog/JUnitFactory</url>
+    <url>http://www.jmmo.org/frameworks/junitfactory</url>
 
     <licenses>
         <license>
