@@ -4,7 +4,22 @@
 JUnitFactoryRunner and @JUnitFactory allow you to create JUnit tests dynamically how the annotation @Factory in TestNG does.
 </p>
 
-##Example
+## How to get it?
+
+You can download the latest build at:
+    https://github.com/Megaprog/JUnitFactory/releases
+
+Or use it as a maven dependency:
+
+```xml
+<dependency>
+    <groupId>org.jmmo</groupId>
+    <artifactId>junit-factory</artifactId>
+    <version>1.0</version>
+</dependency>
+```
+
+## How to use it?
 
 ```java
 import org.junit.runner.RunWith;
