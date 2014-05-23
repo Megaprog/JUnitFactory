@@ -1,4 +1,4 @@
-package example;
+package org.jmmo.testing.example;
 
 public class A {
     private String firstName;

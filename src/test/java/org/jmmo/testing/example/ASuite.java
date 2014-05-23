@@ -1,8 +1,8 @@
-package example;
+package org.jmmo.testing.example;
 
 import org.junit.runner.RunWith;
-import testing.JUnitFactoryRunner;
-import testing.JUnitFactoryRunner.JUnitFactory;
+import org.jmmo.testing.JUnitFactoryRunner;
+import org.jmmo.testing.JUnitFactoryRunner.JUnitFactory;
 
 @RunWith(JUnitFactoryRunner.class)
 public class ASuite {

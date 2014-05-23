@@ -1,4 +1,4 @@
-package example;
+package org.jmmo.testing.example;
 
 import org.junit.Assert;
 import org.junit.Test;
