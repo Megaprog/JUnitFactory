@@ -24,8 +24,8 @@ Or use it as a maven dependency:
 
 ```java
 import org.junit.runner.RunWith;
-import tomas.JUnitFactoryRunner;
-import tomas.JUnitFactoryRunner.JUnitFactory;
+import org.jmmo.testing.JUnitFactoryRunner;
+import org.jmmo.testing.JUnitFactoryRunner.JUnitFactory;
 
 @RunWith(JUnitFactoryRunner.class)
 public class SomeSuite {
